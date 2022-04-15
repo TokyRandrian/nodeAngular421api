@@ -2,6 +2,7 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
+let matiere = require('./routes/matiere');
 let mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
@@ -9,7 +10,8 @@ mongoose.Promise = global.Promise;
 
 // remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
 // const uri = 'mongodb+srv://mb:toto@cluster0.xtr0u.mongodb.net/assignments?retryWrites=true&w=majority';
-const uri = 'mongodb+srv://AngularNode:AngularNode@clusterangularnode.kof6t.mongodb.net/assignments?retryWrites=true&w=majority';
+//const uri = 'mongodb+srv://AngularNode:AngularNode@clusterangularnode.kof6t.mongodb.net/assignments?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://Toky:randrianimanana13@cluster0.oaqqa.mongodb.net/assignments?retryWrites=true&w=majority';
 
 const options = {
   useNewUrlParser: true,
@@ -57,6 +59,16 @@ app.route(prefix + '/assignments/:id')
   .get(assignment.getAssignment)
   .delete(assignment.deleteAssignment);
 
+
+app.route(prefix + '/matiere')
+.get(matiere.getMatieres)
+.post(matiere.postMatiere)
+.put(matiere.updateMatiere);
+
+
+app.route(prefix + '/matiere/:id')
+  .get(matiere.getMatiere)
+  .delete(matiere.deleteMatiere);
  
 
 // On démarre le serveur
