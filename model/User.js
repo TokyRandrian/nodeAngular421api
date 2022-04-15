@@ -12,7 +12,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         min: 6,
         max: 1024
-    }
+    },
+    photo: String,
+    profil: Number
 });
 
 module.exports = mongoose.model('User', userSchema);
