@@ -3,7 +3,9 @@ let app = express();
 let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
 let matiere = require('./routes/matiere');
+let user = require('./routes/user');
 let mongoose = require('mongoose');
+var VerifyToken = require('./auth/VerifyToken');
 
 mongoose.Promise = global.Promise;
 //mongoose.set('debug', true);
@@ -32,7 +34,7 @@ mongoose.connect(uri, options)
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Access-Token, X-Key");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
@@ -51,7 +53,7 @@ let port = process.env.PORT || 8010;
 const prefix = '/api';
 
 app.route(prefix + '/assignments')
-  .get(assignment.getAssignments)
+ .get(VerifyToken,assignment.getAssignments)
   .post(assignment.postAssignment)
   .put(assignment.updateAssignment);
 
@@ -69,7 +71,15 @@ app.route(prefix + '/matiere')
 app.route(prefix + '/matiere/:id')
   .get(matiere.getMatiere)
   .delete(matiere.deleteMatiere);
- 
+
+
+app.route(prefix + '/user')
+  .get(user.getUsers)
+
+app.route(prefix + '/user/:profil')
+.get(user.getUsersByProfil)
+
+
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");

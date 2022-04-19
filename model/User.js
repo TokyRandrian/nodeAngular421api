@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 
 const userSchema = new mongoose.Schema({
     nom: {
@@ -14,7 +15,10 @@ const userSchema = new mongoose.Schema({
         max: 1024
     },
     photo: String,
-    profil: Number
+    profil: Number,
+    id: Number
 });
+
+userSchema.plugin(aggregatePaginate);
 
 module.exports = mongoose.model('User', userSchema);

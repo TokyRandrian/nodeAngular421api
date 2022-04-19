@@ -2,7 +2,6 @@ let Matiere = require('../model/matiere');
 
 
 function getMatieres(req, res) {
-    console.log("************************");
     var aggregateQuery = Matiere.aggregate();
     Matiere.aggregatePaginate(aggregateQuery,
       {
@@ -13,7 +12,6 @@ function getMatieres(req, res) {
         if (err) {
           res.send(err);
         }
-        console.log("************************Matiere"+matiere);
         res.send(matiere);
       }
     );
