@@ -26,6 +26,16 @@ function getUsersByProfil(req, res){
 }
 
 
+function getUser(req, res){
+    let userId = req.params.id;
+
+    User.find({id: userId}, (err, user) =>{
+        if(err){res.send(err)}
+        res.json(user);
+    })
+}
 
 
-module.exports = { getUsers, getUsersByProfil };
+
+
+module.exports = { getUsers, getUsersByProfil,getUser };

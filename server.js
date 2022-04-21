@@ -80,8 +80,12 @@ app.route(prefix + '/matiere/:id')
 app.route(prefix + '/user')
   .get(user.getUsers)
 
-app.route(prefix + '/user/:profil')
+app.route(prefix + '/users/:profil')
 .get(user.getUsersByProfil)
+
+app.route(prefix + '/user/:id')
+.get(user.getUser)
+
 
 
 
