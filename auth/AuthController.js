@@ -19,7 +19,8 @@ router.post('/register', function(req, res) {
       nom : req.body.nom,
       password : hashedPassword,
       photo : req.body.photo,
-      profil : req.body.profil
+      profil : req.body.profil,
+      id : req.body.id
     },
     function (err, user) {
       if (err) return res.status(500).send("There was a problem registering the user. " + err)
